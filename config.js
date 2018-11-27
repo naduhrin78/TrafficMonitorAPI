@@ -11,14 +11,16 @@ var config = {};
 config.staging = {
 	'httpPort': 3000,
 	'httpsPort': 3001,
-	'type': 'staging'
+	'type': 'staging',
+	'hashSecret': 'whocares'
 };
 
 // Configuration for running API on production
 config.production = {
 	'httpPort': 5000,
 	'httpsPort': 5001,
-	'type': 'production'
+	'type': 'production',
+	'hashSecret': 'noonedoes'
 };
 
 env = typeof(process.env.NODE_ENV) == 'string'? process.env.NODE_ENV.toLowerCase(): '';

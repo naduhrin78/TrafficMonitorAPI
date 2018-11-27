@@ -1,6 +1,6 @@
 /*
+*Entry point for app.
 *
-* Entry point for app.
 */
 
 
@@ -12,10 +12,11 @@ const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const fs = require('fs');
 const fileio = require('./lib/fileio');
-
+const handlers = require('./lib/handlers');
+const helpers = require('./lib/helpers');
 
 // Create a server
-function createServer(req, res)
+function _createServer(req, res)
 {
 	// Obtain parsed URL
 	const parsedUrl = url.parse(req.url, true);
@@ -58,7 +59,7 @@ function createServer(req, res)
 			'headers': headers,
 			'query': query,
 			'path': trimmedPath,
-			'payLoad': buffer
+			'payLoad': helpers.jsonToObj(buffer)
 		};
 
 		// Call the handler
@@ -84,8 +85,8 @@ function createServer(req, res)
 
 
 // Create a http server object
-var httpServer = http.createServer(function(req, res){
-	createServer(req, res);	
+const httpServer = http.createServer(function(req, res){
+	_createServer(req, res);	
 });
 
 
@@ -96,15 +97,15 @@ httpServer.listen(config.httpPort, function(){
 
 
 // SSL certificate configuration
-sslConfig = {
+const sslConfig = {
 	'key': fs.readFileSync('./https/key.pem'),
 	'cert': fs.readFileSync('./https/cert.pem')
 }
 
 
 // Create a https server object
-var httpsServer = https.createServer(sslConfig, function(req, res){
-	createServer(req, res);
+const httpsServer = https.createServer(sslConfig, function(req, res){
+	_createServer(req, res);
 });
 
 
@@ -114,25 +115,10 @@ httpsServer.listen(config.httpsPort, function(){
 });
 
 
-// Stores all handlers
-var handlers = {};
-
-
-// Ping handler 
-handlers.pingHandler = function(data, callback){
-	callback(200);
-}
-
-
-// Handler for non existent route
-handlers.defaultHandler = function(data, callback){
-	callback(404);
-}
-
-
 // Object to store all routes: handler pairs
 const router = {
-	'ping': handlers.pingHandler
+	'ping': handlers.pingHandler,
+	'users': handlers.users
 };
 
 
