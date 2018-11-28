@@ -118,7 +118,8 @@ httpsServer.listen(config.httpsPort, function(){
 // Object to store all routes: handler pairs
 const router = {
 	'ping': handlers.pingHandler,
-	'users': handlers.users
+	'users': handlers.users,
+	'tokens': handlers.tokens
 };
 
 
