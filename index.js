@@ -15,6 +15,7 @@ const fileio = require('./lib/fileio');
 const handlers = require('./lib/handlers');
 const helpers = require('./lib/helpers');
 
+
 // Create a server
 function _createServer(req, res)
 {
@@ -119,7 +120,8 @@ httpsServer.listen(config.httpsPort, function(){
 const router = {
 	'ping': handlers.pingHandler,
 	'users': handlers.users,
-	'tokens': handlers.tokens
+	'tokens': handlers.tokens,
+	'checks': handlers.checks
 };
 
 
