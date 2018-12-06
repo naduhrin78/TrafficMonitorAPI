@@ -15,8 +15,8 @@ config.staging = {
 	'hashSecret': 'whocares',
 	'maxChecks': 5,
 	'twilio' : {
-	    'accountSid' : 'AC01dacff55a6b11ff472ffbc751d0ed51',
-	    'authToken' : 'a4fec82740f4dc259125b73d8e636bbb',
+	    'accountSid' : '', // Enter testing account SId
+	    'authToken' : '', // Enter testing authToken
 	    'phone' : '+15005550006'
   	}
 };
@@ -29,9 +29,9 @@ config.production = {
 	'hashSecret': 'noonedoes',
 	'maxChecks': 5,
 	'twilio': {
-		'accountSid': 'AC52626f41bd37c199a1264069019f07ec',
-		'authToken': '920ebd6a253c103057b5090b4325bd84',
-		'phone': '+12245041698'
+		'accountSid': '', // Enter deployment account SId
+		'authToken': '', // Enter deployment authToken
+		'phone': '' // Enter phone number associated with twilio account
 	}
 };
 
